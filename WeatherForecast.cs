@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Api
@@ -16,21 +17,14 @@ namespace Api
 
         public static void Register(WebApplication app)
         {
-            app.MapGet("/todoitems/{id}", async (http) =>
+            app.MapGet("/todoitems/{id}", async ([FromServices] TodoDbContext dbContext, int id) =>
             {
-                if (!http.Request.RouteValues.TryGetValue("id", out var id))
-                {
-                    http.Response.StatusCode = 400;
-                    return;
-                }
-
-                var dbContext = http.RequestServices.GetService<TodoDbContext>();
                 var todoItem = await dbContext.TodoItems.FindAsync(int.Parse(id.ToString()));
                 if (todoItem == null)
                 {
-                    http.Response.StatusCode = 404;
-                    return;
+                    return new StatusCodeResult(StatusCodes.Status404NotFound);
                 }
+                return new StatusCodeResult(StatusCodes.Status200OK);
             });
         }
     }
