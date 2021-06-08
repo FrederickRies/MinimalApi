@@ -8,12 +8,8 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
-});
 
+builder.Services.AddApiVersioning();
 
 // Create application
 using var app = builder.Build();
