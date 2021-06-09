@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Api
+﻿namespace Api
 {
     public class TodoDbContext : DbContext
     {

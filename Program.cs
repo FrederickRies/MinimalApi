@@ -1,9 +1,7 @@
-using Api;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-
 var builder = WebApplication.CreateBuilder(args);
+
+const string s1 = $"abc";
+const string s2 = $"{s1}edf";
 
 // Add services
 
