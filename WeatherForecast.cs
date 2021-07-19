@@ -12,7 +12,7 @@ namespace Api
 
         public static void Register(WebApplication app)
         {
-            app.MapGet("/todoitems/{id}", async ([FromServices] TodoDbContext dbContext, int id) =>
+            app.MapGet("/todoitems/{id}", async (TodoDbContext dbContext, int id) =>
             {
                 var todoItem = await dbContext.TodoItems.FindAsync(int.Parse(id.ToString()));
                 if (todoItem == null)
